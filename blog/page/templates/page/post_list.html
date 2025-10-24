@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+{% block title %}All Posts{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">پست ها</h1>
+
+
+{% for post in posts %}
+<div class="card mb-3">
+    {% if post.image %}
+    <img src="{{ post.image.url }}" class="img-fluid" style="max-width:400px; height:auto;" alt="{{ post.title }}">
+    {% endif %}
+    <div class="card-body">
+        <h5 class="card-title">
+            {% if post.slug %}
+            <a href="{% url 'post_detail' slug=post.slug %}">{{ post.title }}</a>
+            {% else %}
+            {{ post.title }}
+            {% endif %}
+        </h5>
+        
+   
+
+
+        <div class="d-flex align-items-center mb-2">
+            {% if post.author.avatar %}
+            <img src="{{ post.author.avatar.url }}" alt="آواتار" class="me-2"
+                style="width: 35px; height: 35px; border-radius: 50%; object-fit: cover;">
+            {% endif %}
+           <small class="text-muted">
+                By <a href="{% url 'profile_detail' username=post.author.username %}">
+                    {{ post.author.username }}
+                </a> | {{ post.created_at|date:"Y-m-d H:i" }}
+            </small>
+        </div>
+
+        {% if request.user == post.author or request.user.is_staff %}
+        {% if post.slug %}
+        <a href="{% url 'post_update' slug=post.slug %}" class="btn btn-sm btn-warning">ویرایش</a>
+        <button type="button" class="btn btn-sm btn-danger delete-btn" data-bs-toggle="modal"
+            data-bs-target="#deleteModal" data-post-slug="{{ post.slug }}" data-post-title="{{ post.title }}">
+            حذف
+        </button>
+        {% endif %}
+        {% endif %}
+
+        <!-- دکمه لایک -->
+        {% if post.slug %}
+        <form method="post" action="{% url 'post_like' slug=post.slug %}" class="d-inline">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary btn-sm">
+                👍 Like ({{ post.likes.count }})
+            </button>
+        </form>
+        {% endif %}
+
+        <!-- کامنت ها -->
+        <h4 class="mt-3">نظرات</h4>
+        <div class="mb-4">
+            {% for comment in post.comments.all %}
+            <div class="border rounded p-2 mb-2">
+                <p>{{ comment.text }}</p>
+                <small class="text-muted">By {{ comment.user }} | {{ comment.created_at|date:"Y-m-d H:i" }}</small>
+            </div>
+            {% empty %}
+            <p>هنوز نظری ثبت نشده.</p>
+            {% endfor %}
+
+            {% if request.user.is_authenticated %}
+            {% if post.slug %}
+            <div class="card p-3 mb-4">
+                <form method="post" action="{% url 'add_comment' slug=post.slug %}">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="id_text_{{ post.id }}" class="form-label">نظر شما</label>
+                        <textarea name="text" id="id_text_{{ post.id }}" rows="3" class="form-control"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-success">ثبت نظر</button>
+                </form>
+            </div>
+            {% endif %}
+            {% else %}
+            <p>برای ثبت نظر <a href="{% url 'login' %}">وارد شوید</a>.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+<!-- مودال عمومی برای حذف -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title" id="deleteModalLabel">حذف پست</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="بستن"></button>
+
+            </div>
+            <div class="modal-body">
+                آیا مطمئنی می‌خوای پست <strong id="postTitle"></strong> رو حذف کنی؟
+            </div>
+            <div class="modal-footer">
+                <form method="post" id="deleteForm">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">بله، حذفش کن</button>
+                </form>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- اسکریپت برای تنظیم مودال -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.delete-btn').forEach(button => {
+            button.addEventListener('click', function () {
+                const slug = this.getAttribute('data-post-slug');
+                const title = this.getAttribute('data-post-title');
+                document.getElementById('postTitle').textContent = title;
+                document.getElementById('deleteForm').action = "{% url 'post_delete' slug='__SLUG__' %}".replace('__SLUG__', slug);
+            });
+        });
+    });
+</script>
+
+<!-- Pagination -->
+<nav>
+    <ul class="pagination">
+        {% if page_obj.has_previous %}
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+        {% endif %}
+        <li class="page-item disabled">
+            <span class="page-link">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+        </li>
+        {% if page_obj.has_next %}
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+        {% endif %}
+    </ul>
+</nav>
+
+{% endblock %}

@@ -1,0 +1,436 @@
+@import url('https://cdn.fontcdn.ir/Font/Persian/Shabnam/stylesheet.css');
+
+/* 🌐 تنظیمات پایه */
+body {
+  font-family: 'Shabnam', sans-serif !important;
+  background: linear-gradient(135deg, #e3f2fd, #ffffff);
+  direction: rtl;
+  text-align: right;
+  color: #0b3050;
+  min-height: 100vh;
+  padding-top: 90px;
+}
+
+/* 🌫️ نوار ناوبری شیشه‌ای */
+.navbar {
+  background: rgba(255, 255, 255, 0.25) !important;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand,
+.nav-link {
+  color: #0b3050 !important;
+  font-weight: 600;
+  text-shadow: 0 0 8px rgba(0, 255, 255, 0.4);
+  transition: 0.3s;
+}
+
+.nav-link:hover {
+  color: #00c6ff !important;
+  text-shadow: 0 0 12px rgba(0, 255, 255, 0.8);
+}
+
+/* 🧊 کارت‌ها */
+.card {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  border-radius: 20px;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.15);
+  transition: all 0.3s ease;
+  padding: 15px;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+}
+
+/* 📸 عکس پست */
+.card img {
+  width: 100%;
+  height: 250px;
+  object-fit: contain;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.25);
+}
+
+/* 🧠 تیترها */
+h1 {
+  text-align: center;
+  color: #0d0220;
+  text-shadow: 0 0 25px rgba(51, 131, 131, 0.7);
+  margin-bottom: 30px;
+  font-weight: 700;
+}
+
+h2,
+h3,
+h4,
+h5 {
+  color: #0b3050;
+  text-shadow: 0 0 8px rgba(0, 255, 255, 0.3);
+}
+
+/* 🩵 لینک‌ها */
+.card-title a {
+  color: #00bcd4;
+  text-decoration: none;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.card-title a:hover {
+  color: #fff;
+  text-shadow: 0 0 20px #00ffff;
+}
+
+/* 🩶 متن پست */
+.card-text {
+  color: #1c4966;
+  line-height: 1.9;
+}
+
+/* 💬 کامنت‌ها */
+.border.rounded.p-2.mb-2 {
+  border: 1px solid rgba(0, 255, 255, 0.4);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.07);
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.2);
+  transition: 0.3s;
+}
+
+.border.rounded.p-2.mb-2:hover {
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.4);
+}
+
+/* ✍️ textarea و فرم نظر */
+textarea,
+input {
+  background: rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  border-radius: 10px;
+  color: #0b3050;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: 0.3s;
+}
+
+textarea:focus,
+input:focus {
+  border-color: #00e0ff;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
+  outline: none;
+}
+
+/* 🔘 دکمه‌ها */
+.btn {
+  border: none;
+  border-radius: 10px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(45deg, #00ffff, #007bff);
+  color: #0b3050;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(45deg, #00e0ff, #0099ff);
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.6);
+}
+
+.btn-danger {
+  background: rgba(255, 80, 100, 0.4);
+  box-shadow: 0 0 10px rgba(255, 80, 100, 0.6);
+}
+
+.btn-danger:hover {
+  background: rgba(255, 80, 100, 0.8);
+}
+
+/* 📄 Pagination */
+.pagination .page-link {
+  background: rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #0b3050;
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+}
+
+.pagination .page-link:hover {
+  background: rgba(0, 255, 255, 0.3);
+  color: #0b3050;
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.7);
+}
+
+/* 🌟 افکت درخشش */
+.neon-glow {
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.8),
+    0 0 20px rgba(255, 0, 255, 0.6);
+}
+
+/* 🌠 صفحه جزئیات پست */
+.post-detail-img {
+  width: 100%;
+  max-height: 500px;
+  object-fit: contain;
+  border-radius: 20px;
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 10px;
+}
+
+.card.mx-auto.p-4 {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  border-radius: 20px;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.25);
+  transition: all 0.3s ease;
+}
+
+.card.mx-auto.p-4:hover {
+  box-shadow: 0 0 40px rgba(0, 255, 255, 0.4);
+}
+
+/* 🏷️ تگ‌ها و دسته‌ها */
+.badge {
+  font-size: 1rem;
+  padding: 8px 12px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.badge.bg-info {
+  background: rgba(0, 255, 255, 0.3) !important;
+  color: #0b3050 !important;
+}
+
+.badge.bg-secondary {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  color: #00ffff !important;
+}
+
+/* 📘 متن اصلی پست */
+.card-text.fs-5 {
+  color: #e5f6ff;
+  line-height: 1.9;
+}
+
+/* 🌠 جزئیات پست */
+.post-detail-img {
+  width: 100%;
+  max-height: 550px;
+  object-fit: contain;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.3);
+  padding: 10px;
+}
+
+/* 💬 کارت نظرات */
+.comment-card {
+  border: 1px solid rgba(0, 255, 255, 0.4);
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.25);
+  transition: 0.3s;
+}
+
+.comment-card:hover {
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
+  transform: translateY(-3px);
+}
+
+/* 🌫️ فرم نظر */
+.glass-form {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  backdrop-filter: blur(15px);
+  border-radius: 15px;
+}
+
+/* ✨ درخشش دکمه‌ها */
+.shadow-glow {
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+}
+
+.shadow-glow:hover {
+  box-shadow: 0 0 35px rgba(0, 255, 255, 0.6);
+}
+
+/* 📘 بهبود تایپوگرافی */
+body {
+  font-family: 'Shabnam', sans-serif !important;
+}
+
+.like-btn {
+  font-size: 1rem;
+  padding: 6px 18px;
+  border-radius: 25px;
+  border: 1px solid rgba(0, 255, 255, 0.5);
+  background: rgba(0, 255, 255, 0.05);
+  color: #00ffff;
+  transition: all 0.3s ease;
+}
+
+.like-btn:hover {
+  background: rgba(0, 255, 255, 0.15);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+/* کارت شیشه‌ای فرم */
+.glass-card {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+  color: #fff;
+  position: relative;
+  z-index: 1;
+}
+
+/* عنوان نئونی */
+.neon-text {
+  color: rgb(0, 0, 0);
+  text-shadow: 0 0 10px cyan, 0 0 25px cyan;
+  font-family: "Shabnam", sans-serif;
+}
+
+/* برچسب‌های فرم */
+.neon-label {
+  color: rgb(5, 66, 66);
+  text-shadow: 0 0 6px cyan;
+  font-weight: bold;
+}
+
+/* فیلدهای ورودی */
+input, textarea, select {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(0, 255, 255, 0.4) !important;
+  color: white !important;
+  border-radius: 10px;
+  width: 100%;
+  padding: 10px;
+  font-family: "Shabnam", sans-serif;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: cyan !important;
+  box-shadow: 0 0 10px cyan !important;
+  outline: none !important;
+}
+
+/* دکمه نئونی */
+.btn-neon {
+  background: transparent;
+  color: cyan;
+  border: 2px solid cyan;
+  border-radius: 10px;
+  padding: 8px 24px;
+  font-family: "Shabnam", sans-serif;
+  text-shadow: 0 0 8px cyan;
+  transition: all 0.3s ease;
+}
+
+.btn-neon:hover {
+  background: cyan;
+  color: black;
+  box-shadow: 0 0 20px cyan;
+}
+
+/* 🌈 فیلدهای ورودی شیشه‌ای */
+input,
+textarea,
+select {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  border-radius: 10px;
+  color: #0b3050;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 10px 15px;
+  font-family: "Shabnam", sans-serif;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+/* زمانی که روی input فوکوس می‌کنی */
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #00ffff;
+  background: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+  outline: none;
+}
+
+/* رنگ متن placeholder */
+input::placeholder,
+textarea::placeholder {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+/* متن نوشته‌شده واضح باشه */
+input,
+textarea {
+  color: #000 !important;
+}
+
+/* اصلاح z-index برای مودال و بک‌دراپ */
+.modal-backdrop {
+  z-index: 1040 !important;
+}
+
+.modal {
+  z-index: 1050 !important;
+}
+select.form-control,
+select {
+  background-color: #81d3d3 !important;
+  color: #fff !important;
+  border: 1px solid #555;
+}
+
+select option {
+  background-color: #8ccbff;
+  color: #fff;
+}
+/* موبایل */
+@media (max-width: 576px) {
+  body {
+    padding-top: 70px;
+  }
+  .card {
+    margin-bottom: 15px;
+  }
+}
+
+/* تبلت */
+@media (max-width: 768px) {
+  .navbar {
+    text-align: center;
+  }
+}
+
+/* دسکتاپ */
+@media (min-width: 992px) {
+  .container {
+    max-width: 900px;
+  }
+}

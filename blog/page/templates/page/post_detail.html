@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block title %}{{ post.title }} | My Blog{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="card mx-auto p-4" style="max-width: 900px;">
+
+    <!-- عنوان پست -->
+    <h1 class="text-center mb-3 neon-glow">{{ post.title }}</h1>
+
+    <!-- اطلاعات نویسنده و تاریخ -->
+    <p class="text-center text-muted">
+      ✍️ <strong>{{ post.author }}</strong>
+      | 🕒 {{ post.created_at|date:"Y-m-d H:i" }}
+    </p>
+
+    <!-- تصویر پست -->
+    {% if post.image %}
+    <div class="text-center mb-4">
+      <img src="{{ post.image.url }}" alt="{{ post.title }}" class="post-detail-img">
+    </div>
+    {% endif %}
+
+    <!-- محتوای پست -->
+    <div class="card-text fs-5 mb-4" style="text-align: justify;">
+      {{ post.content|linebreaks }}
+    </div>
+
+    <!-- دسته‌بندی و تگ‌ها -->
+    <div class="d-flex flex-wrap gap-2 mb-4 justify-content-center">
+      <span class="badge bg-info text-dark">🏷️ دسته: {{ post.category }}</span>
+      {% for tag in post.tags.all %}
+      <span class="badge bg-secondary text-light">#{{ tag.name }}</span>
+      {% empty %}
+      <span class="badge bg-light text-dark">بدون تگ</span>
+      {% endfor %}
+    </div>
+
+    <!-- دکمه لایک -->
+    <div class="text-center mb-4">
+      <form method="post" action="{% url 'post_like' slug=post.slug %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-outline-info like-btn shadow-glow">
+          👍 لایک ({{ post.likes.count }})
+        </button>
+
+      </form>
+    </div>
+
+    <!-- بخش نظرات -->
+    <div class="comments-section mt-5">
+      <h3 class="text-center mb-4 neon-glow">💬 نظرات کاربران</h3>
+
+      {% for comment in post.comments.all %}
+      <div class="comment-card mb-3 p-3">
+        <p>{{ comment.text }}</p>
+        <small class="text-muted">👤 {{ comment.user }} | {{ comment.created_at|date:"Y-m-d H:i" }}</small>
+      </div>
+      {% empty %}
+      <p class="text-center text-muted">هنوز نظری ثبت نشده است.</p>
+      {% endfor %}
+
+      {% if request.user.is_authenticated %}
+      <div class="card p-3 mt-4 glass-form">
+        <form method="post" action="{% url 'add_comment' slug=post.slug %}">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label for="id_text" class="form-label">نظر شما</label>
+            <textarea name="text" id="id_text" rows="3" class="form-control"></textarea>
+          </div>
+          <button type="submit" class="btn btn-success">ارسال نظر</button>
+        </form>
+      </div>
+      {% else %}
+      <p class="text-center">برای ثبت نظر <a href="{% url 'login' %}">وارد شوید</a>.</p>
+      {% endif %}
+    </div>
+
+    <!-- بازگشت -->
+    <div class="text-center mt-4">
+      <a href="{% url 'post_list' %}" class="btn btn-primary">⬅️ بازگشت به لیست پست‌ها</a>
+    </div>
+
+  </div>
+</div>
+{% endblock %}
